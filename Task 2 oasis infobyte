@@ -1,0 +1,49 @@
+#Task 2- Simple Password Generator
+
+import random
+import string
+
+# Function to generate a single password
+def generate_password(length, use_uppercase=True, use_numbers=True, use_special=True):
+    # Define character sets
+    lowercase = string.ascii_lowercase
+    uppercase = string.ascii_uppercase
+    digits = string.digits
+    special_characters = string.punctuation
+
+    # Build a pool of characters based on user input
+    character_pool = lowercase
+    if use_uppercase:
+        character_pool += uppercase
+    if use_numbers:
+        character_pool += digits
+    if use_special:
+        character_pool += special_characters
+
+    # Generate a random password
+    password = ''.join(random.choice(character_pool) for _ in range(length))
+
+    return password
+
+# Main function to get user input and generate passwords for multiple users
+def main():
+    print("Welcome to the Simple Password Generator!")
+    
+    num_users = int(input("How many users would you like to generate passwords for? "))
+    
+    for user_num in range(1, num_users + 1):
+        print(f"\n--- User {user_num} ---")
+        # Get user input for password criteria
+        length = int(input("Enter the desired password length: "))
+        use_uppercase = input("Include uppercase letters? (y/n): ").lower() == 'y'
+        use_numbers = input("Include numbers? (y/n): ").lower() == 'y'
+        use_special = input("Include special characters? (y/n): ").lower() == 'y'
+
+        # Generate the password for this user
+        password = generate_password(length, use_uppercase, use_numbers, use_special)
+
+        # Display the generated password
+        print(f"Generated password for User {user_num}: {password}")
+
+if __name__ == "__main__":
+    main()
